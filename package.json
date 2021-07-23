@@ -1,0 +1,80 @@
+{
+    "name": "medly-boilerplate",
+    "version": "0.0.0",
+    "description": "",
+    "license": "ISC",
+    "scripts": {
+        "prepare": "husky install",
+        "pre-commit": "lint-staged",
+        "clean": "rimraf dist coverage",
+        "lint:css": "stylelint 'src/**/*.tsx'",
+        "lint:ts": "eslint 'src/**/*.{ts,tsx}'",
+        "lint": "run-p lint:ts lint:css",
+        "lint:fix": "run-p 'lint:ts --fix' 'lint:css --fix'",
+        "test:update": "run-p test:types 'test:jest -- -u'",
+        "test:watch": "run-p 'test:types -- -w' 'test:jest -- --watch'",
+        "test:jest": "jest",
+        "test:types": "tsc",
+        "test": "run-p test:types test:jest",
+        "watch": "webpack serve --open --mode development --config node_modules/@medly/webpack-config",
+        "dist": "webpack --mode production --progress --config node_modules/@medly/webpack-config",
+        "dist:analyze": "npm run dist -- --analyze"
+    },
+    "lint-staged": {
+        "src/**/*.{ts,tsx}": [
+            "eslint 'src/**/*.tsx' --fix",
+            "stylelint 'src/**/*.tsx' --fix"
+        ]
+    },
+    "babel": {
+        "extends": "@medly/babel-config-react"
+    },
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
+        "extends": "@medly/react"
+    },
+    "stylelint": {
+        "extends": "@medly/stylelint-config"
+    },
+    "prettier": "@medly/prettier-config",
+    "dependencies": {
+        "@medly-components/core": "^1.54.0",
+        "@medly-components/forms": "^1.22.2",
+        "@medly-components/layout": "^1.22.2",
+        "@medly-components/loaders": "^1.1.1",
+        "@medly-components/theme": "^1.30.9",
+        "@medly-components/utils": "^1.10.1",
+        "axios": "^0.21.1",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-redux": "^7.2.4",
+        "react-router-dom": "^5.2.0",
+        "redux": "^4.1.0",
+        "redux-saga": "^1.1.3",
+        "styled-components": "^5.3.0"
+    },
+    "devDependencies": {
+        "@medly/babel-config-react": "^0.1.4",
+        "@medly/eslint-config-react": "^0.1.6",
+        "@medly/jest-config-react": "^0.1.0",
+        "@medly/prettier-config": "^0.1.1",
+        "@medly/stylelint-config": "^0.1.2",
+        "@medly/typescript-config-react": "^0.0.2",
+        "@medly/webpack-config": "^0.1.7",
+        "@testing-library/react": "^9.5.0",
+        "@types/react": "^17.0.6",
+        "@types/react-dom": "^17.0.7",
+        "@types/react-redux": "^7.1.16",
+        "@types/react-router-dom": "^5.1.7",
+        "@types/redux-mock-store": "^1.0.2",
+        "@types/styled-components": "^5.1.9",
+        "axios-mock-adapter": "^1.19.0",
+        "husky": "6.0.0",
+        "lint-staged": "^11.0.0",
+        "npm-run-all": "^4.1.5",
+        "redux-devtools-extension": "^2.13.9",
+        "redux-mock-store": "^1.5.4",
+        "rimraf": "^3.0.2"
+    },
+    "author": ""
+}
